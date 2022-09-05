@@ -16,7 +16,7 @@ const ResponsiveAppBar = () => {
   }
 
  return (
-    <AppBar position="static" sx={{ bgcolor: "black" }}>
+    <AppBar position="static" sx={{ bgcolor: "black", width:"100vw" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box

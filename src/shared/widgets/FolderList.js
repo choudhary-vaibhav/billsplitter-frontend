@@ -14,7 +14,7 @@ export const FolderList = () => {
   return (
     <Container>
       <h2>Expense Tracker</h2>
-      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#FEE0C0" }}>
+      <List sx={{ width: "100%", maxWidth: 360, bgcolor: "#1C6DD0", borderRadius:"10px", color:"white" }}>
         <ListItem>
           <ListItemAvatar>
             <Avatar>

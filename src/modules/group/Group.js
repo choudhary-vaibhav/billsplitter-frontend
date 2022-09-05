@@ -7,8 +7,6 @@ import { Addtransaction } from "../../shared/widgets/Addtransaction";
 export const GROUP =  () => {
     return(
         <>
-        <Navbar/>
-        <br />
         <Expensetracker/>
         <br />
         <Members/>
