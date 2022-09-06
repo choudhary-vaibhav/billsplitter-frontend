@@ -47,7 +47,7 @@ export const LedgerCard = ({group_name}) => {
         const transactionObject = {'name':group_name};
 
         try{
-            const URL = process.env.REACT_APP_LEDGER_URL + group_name;
+            const URL = process.env.REACT_APP_LEDGER_URL + 'ledger/' + group_name + '/data';
             //console.log(URL);
             const result = await API_CLIENT.post(URL, transactionObject);
             if(result){
@@ -62,12 +62,9 @@ export const LedgerCard = ({group_name}) => {
         }
     }
 
-    // const Demo = styled('div')(({ theme }) => ({
-    //     backgroundColor: theme.palette.background.paper,
-    //   }));
 
     return <>
-        {/* <Button onClick = {getData} variant="contained">Show</Button><br/> */}
+        
         {loading?
                 <Box>
                     <br/>
@@ -78,9 +75,9 @@ export const LedgerCard = ({group_name}) => {
                     <br/>
                 </Box>
             : <>
-            <br/>
-            <Container sx={{width:"100vw", display:"flex"}}>
-            <List sx={{width: "100vw", maxWidth: 460, bgcolor: "#1C6DD0", borderRadius:"10px", color:"white"}}>
+            {/* media query for 50vw and 100vw */}
+            <Container sx={{width:"50vw", display:"flex"}}> 
+            <List sx={{width: "100vw", minWidth: 500, bgcolor: "#1C6DD0", borderRadius:"10px", color:"white"}}>
                         <ListItem key="heading">
                             <Typography sx={{fontWeight:"bold"}} variant="h5">
                                 Group Transactions
