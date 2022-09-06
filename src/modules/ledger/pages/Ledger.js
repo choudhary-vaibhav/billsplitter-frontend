@@ -3,6 +3,7 @@ import { AddTransaction } from "../components/AddTransaction";
 import { Grid } from "@mui/material";
 import { Members } from "../../members/Members";
 import { Box } from "@mui/system";
+import { BalanceOutput } from "../../balances/domain/repository/balances";
 
 export const Ledger = ({group_name}) => {
 
@@ -23,8 +24,13 @@ export const Ledger = ({group_name}) => {
             </Grid>
             </Grid>
             </Box>     
-            
+            <Grid item md={12} sm={12}>
+                <BalanceOutput group_name={group_name}/>
+            </Grid>
         </Grid>
+        <br/>
+
+        
         
     </>
 }

@@ -60,6 +60,16 @@ export const Members = ({group_name}) => {
         }
 	}
 
+	const cardWidth = {
+        width: '100vw',
+        '@media (min-width: 720px)' : {
+          width: '50vw'
+        },
+		'@media (min-width: 600px && max-width: 720px)' : {
+			width: '75vw'
+		  }
+      }
+
 
   return (
     <>
@@ -73,8 +83,8 @@ export const Members = ({group_name}) => {
                     <br/>
                 </Box>
             : <>
-				<Container sx={{width:"50vw", display:"flex"}}>
-				<Box sx={{ width: "100vw", minWidth: 500, bgcolor: "#1C6DD0", borderRadius:"10px", color:"white" }}>
+				<Container sx={{width: cardWidth, display:"flex"}}>
+				<Box sx={{ width: "100vw", bgcolor: "#1C6DD0", borderRadius:"10px", color:"white" }}>
 					<List>
 						<ListItem key="heading">
                             <Typography sx={{fontWeight:"bold", m:1}} variant="h5">
@@ -105,6 +115,7 @@ export const Members = ({group_name}) => {
 					</List>
 				</Box>
 				</Container>
+				<br/>
 			</>
 		}
     </>

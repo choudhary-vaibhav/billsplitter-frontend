@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { Container } from '@mui/system';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const LedgerCard = ({group_name}) => {
 
@@ -62,6 +63,15 @@ export const LedgerCard = ({group_name}) => {
         }
     }
 
+    const cardWidth = {
+        width: '100vw',
+        '@media (min-width: 720px)' : {
+          width: '50vw'
+        },
+		'@media (min-width: 600px && max-width: 720px)' : {
+			width: '75vw'
+		  }
+      }
 
     return <>
         
@@ -76,8 +86,8 @@ export const LedgerCard = ({group_name}) => {
                 </Box>
             : <>
             {/* media query for 50vw and 100vw */}
-            <Container sx={{width:"50vw", display:"flex"}}> 
-            <List sx={{width: "100vw", minWidth: 500, bgcolor: "#1C6DD0", borderRadius:"10px", color:"white"}}>
+            <Container sx={{width: cardWidth, display:"flex"}}> 
+            <List sx={{width: "100vw", bgcolor: "#1C6DD0", borderRadius:"10px", color:"white"}}>
                         <ListItem key="heading">
                             <Typography sx={{fontWeight:"bold"}} variant="h5">
                                 Group Transactions
@@ -113,6 +123,7 @@ export const LedgerCard = ({group_name}) => {
                 }
             </List>
           </Container>
+          <br />
           </>
         
         }
