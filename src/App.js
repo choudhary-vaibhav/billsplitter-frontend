@@ -1,4 +1,5 @@
 import './App.css';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { GROUP } from './modules/group/Group';
 import { Homepage } from './modules/homepage/Homepage';
 import { Ledger } from './modules/ledger/pages/Ledger';
@@ -10,7 +11,13 @@ import { Navbar } from './shared/widgets/Navbar';
 function App() {
   return (
     <>
-      <Navbar/>
+    <Navbar/>
+      <Routes>
+        <Route path='/' element = { <Homepage/> } exact />
+        <Route path='/CreateGroup' element = { <CreateGroup/> } exact />
+        <Route path='/GroupLogin' element = { <GroupLogin/> } exact />
+        <Route path='/Ledger/:groupName' element = { <Ledger /> }/>
+      </Routes>
       <br />
       {/* <div className='page'>
         <Ledger group_name="awesome"></Ledger>
@@ -18,10 +25,11 @@ function App() {
         <GROUP/>
       </div> */}
       {/* <Members group_name="awesome"/> */}
-      <GroupLogin/>
-      <CreateGroup/>
+      {/* <GroupLogin/>
+      <br/>
+      <CreateGroup/> */}
 
-      <Ledger group_name='awesome'/>
+      {/* <Ledger group_name='awesome'/> */}
       
     </>
   );
