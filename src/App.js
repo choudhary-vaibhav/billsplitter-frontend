@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { GROUP } from './modules/group/Group';
 import { Homepage } from './modules/homepage/Homepage';
 import { Ledger } from './modules/ledger/pages/Ledger';
 import { Members } from './modules/members/Members';

@@ -5,29 +5,28 @@ import Button from '@mui/material/Button';
 import { FormControl,Typography } from '@mui/material';
 import { useEffect, useState, useRef } from "react";
 import { API_CLIENT } from '../../shared/services/api-client';
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useParams } from 'react-router-dom';
 
 export const CreateGroup = () => {
-
+	const [groupName, setGroupName] = useState('');
     const group = useRef('');
 	const pwd = useRef('');
+    const [msg, setMsg] = useState('');
 
     const doRegister = async ()=>{
-        const groupName = group.current.value;
+        const group_Name = group.current.value;
         const password= pwd.current.value;
 
-        const groupObject = {'name':groupName, 'password':password};
+        const groupObject = {'name':group_Name, 'password':password};
         console.log('groupObject is ', groupObject);
         try{
         const result = await API_CLIENT.post(process.env.REACT_APP_CREATE_URL, groupObject); 
            
-        
-        if(result){
-            // setMsg(result.data.message);
-            console.log(result.data.message);
-            console.log(result.data.group_name);
-        } 
+            console.log(result);
+            setMsg(result.data.message);
+			setGroupName(group_Name);
+            //console.log(result.data.group_name);
     }
         catch(err){
             console.log('Error in Login Call ', err);
@@ -46,33 +45,44 @@ export const CreateGroup = () => {
 
   return (
     <>
-      <Container>
-        <form autoComplete='off'>
-            <FormControl sx={{width:cardWidth, display:"flex", m:5}}>
-                    <h1>Create a New Group</h1>
-                    <TextField
-                        required
-                        inputRef={group}
-                        id="outlined-basic"
-                        label="Group Name"
-                        variant="outlined"
-                    />
-                    <br />
-                    <TextField
-                        required
-                        inputRef={pwd}
-                        id="outlined-basic"
-                        type="password"
-                        label="Password"
-                        variant="outlined"
-                    />
-                    <br />
-                    <Button onClick={doRegister} variant="contained">
-                        REGISTER
-                    </Button>
-            </FormControl>
-        </form> 
-      </Container>
+        {msg?
+
+		<Navigate replace to={{pathname: `/Ledger/${groupName}`}}></Navigate>
+		:
+			<Container>
+			<form autoComplete='off'>
+				<FormControl sx={{width:cardWidth, display:"flex", m:5}}>
+						<h1>Create a New Group</h1>
+						<TextField
+							required
+							inputRef={group}
+							id="outlined-basic"
+							label="Group Name"
+							variant="outlined"
+						/>
+						<br />
+						<TextField
+							required
+							inputRef={pwd}
+							id="outlined-basic"
+							type="password"
+							label="Password"
+							variant="outlined"
+						/>
+						<br />
+						<Button onClick={doRegister} variant="contained">
+							REGISTER
+						</Button>
+				</FormControl>
+			</form>
+		  </Container>
+
+		}
+      
+
+      {/* <Link style={{textDecoration: 'none',color:"white"}} to={{pathname: `/GroupLogin`}}>
+                <h2>{msg}</h2>
+		</Link> */}
     </>
   );
 };

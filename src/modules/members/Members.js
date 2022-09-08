@@ -24,6 +24,14 @@ export const Members = ({group_name}) => {
 		getMembers();
 	},[])
 
+	const checkMember = () => {
+		if(members.includes(newMember)){
+			addMember();
+		}else{
+			window.alert('member already exists');
+		}
+	}
+
   	const getMembers = async () => {
 		try{
 			const URL = process.env.REACT_APP_LEDGER_URL + group_name + '/member';
@@ -41,23 +49,28 @@ export const Members = ({group_name}) => {
 	}
 
 	const addMember = async () => {
+
+		if(newMember.current.value){
+			const new_member = newMember.current.value;
+
+			const memberObject = {'new_member':new_member};
+			newMember.current.value = '';
+
+			try{
+				const URL = process.env.REACT_APP_LEDGER_URL + group_name + '/update';
+
+				const result = await API_CLIENT.post(URL, memberObject);
+				if(result && result.data.message){
+					console.log(result.data.message);
+					//getMembers();
+					window.location.reload();
+				}
+			}catch(err){
+				console.log('Error in adding transaction ', err);
+			}
+		}
 		
-		const new_member = newMember.current.value;
-
-		const memberObject = {'new_member':new_member};
-		newMember.current.value = '';
-
-		try{
-            const URL = process.env.REACT_APP_LEDGER_URL + group_name + '/update';
-
-            const result = await API_CLIENT.post(URL, memberObject);
-            if(result && result.data.message){
-                console.log(result.data.message);
-				getMembers();
-            }
-        }catch(err){
-            console.log('Error in adding transaction ', err);
-        }
+		
 	}
 
 	const cardWidth = {
@@ -105,7 +118,7 @@ export const Members = ({group_name}) => {
 
 						<ListItem
                             secondaryAction={
-                                <IconButton onClick={addMember} edge="end" aria-label="add">
+                                <IconButton onClick={checkMember} edge="end" aria-label="add">
                                 <PersonAddIcon />
                                 </IconButton>
                             }

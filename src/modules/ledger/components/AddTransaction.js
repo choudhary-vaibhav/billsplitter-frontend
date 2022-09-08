@@ -35,6 +35,7 @@ export const AddTransaction = ({group_name}) => {
             const result = await API_CLIENT.post(URL, transactionObject);
             if(result && result.data.message){
                 console.log(result.data.message);
+                window.location.reload();
             }
         }catch(err){
             console.log('Error in adding transaction ', err);

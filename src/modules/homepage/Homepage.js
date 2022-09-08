@@ -8,7 +8,7 @@ import { Ledger } from "../ledger/pages/Ledger";
 
 export const Homepage = () => {
   return (
-    <Container id='homepage'>
+    <Container id='homepage' st>
       <Grid container alignItems="center" justifyContent="center" direction="column" maxWidth="sm" style={{ minHeight: '80vh' }}>
         <img src={Logo} alt="img" width="100" height="100" />
         <h1>SPLITTZER</h1>

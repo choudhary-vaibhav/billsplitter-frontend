@@ -118,7 +118,7 @@ export const BalancesCalc = ({group_name}) => {
         {isBalanceCalc?
             <BalanceOutput balancesArray={balancesArray}/>
         :
-            <div>abc</div>
+            <div></div>
         }
 
     </>

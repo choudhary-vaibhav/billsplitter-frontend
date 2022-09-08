@@ -35,7 +35,7 @@ export const BalanceOutput = ({balancesArray}) => {
 
                         const payer = balanceObj['payer'];
                         const payee = balanceObj['payee'];
-                        const amount = balanceObj['amount'];
+                        const amount = balanceObj['amount'].toFixed(2);
 
                         return (
                                 <TableRow>
