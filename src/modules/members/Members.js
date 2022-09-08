@@ -22,15 +22,8 @@ export const Members = ({group_name}) => {
 
 	useEffect(()=>{
 		getMembers();
-	},[])
+	})
 
-	const checkMember = () => {
-		if(members.includes(newMember)){
-			addMember();
-		}else{
-			window.alert('member already exists');
-		}
-	}
 
   	const getMembers = async () => {
 		try{
@@ -106,7 +99,7 @@ export const Members = ({group_name}) => {
                         </ListItem>
 					{	members.map(member => {
 							return (
-								<ListItem>
+								<ListItem  key={member}>
 									<ListItemIcon>
 										<AccountCircleIcon />
 									</ListItemIcon>
@@ -118,7 +111,7 @@ export const Members = ({group_name}) => {
 
 						<ListItem
                             secondaryAction={
-                                <IconButton onClick={checkMember} edge="end" aria-label="add">
+                                <IconButton onClick={addMember} edge="end" aria-label="add">
                                 <PersonAddIcon />
                                 </IconButton>
                             }
