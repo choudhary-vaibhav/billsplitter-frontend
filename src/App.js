@@ -1,8 +1,7 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { Homepage } from './modules/homepage/Homepage';
 import { Ledger } from './modules/ledger/pages/Ledger';
-import { Members } from './modules/members/Members';
 import { CreateGroup } from './modules/user/CreateGroup';
 import { GroupLogin } from './modules/user/GroupLogin';
 import { Navbar } from './shared/widgets/Navbar';

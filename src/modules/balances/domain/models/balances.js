@@ -8,7 +8,7 @@ export const BALANCES = {
 			//console.log(URL);
 			const result = await API_CLIENT.post(URL);
 			if(result){
-				const members = result.data.members; 
+				//const members = result.data.members; 
 				//console.log(members);
                 return (result);
 			}

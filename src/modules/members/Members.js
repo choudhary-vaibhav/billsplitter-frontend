@@ -54,7 +54,7 @@ export const Members = ({group_name}) => {
 
 				const result = await API_CLIENT.post(URL, memberObject);
 				if(result && result.data.message){
-					console.log(result.data.message);
+					//console.log(result.data.message);
 					//getMembers();
 					window.location.reload();
 				}

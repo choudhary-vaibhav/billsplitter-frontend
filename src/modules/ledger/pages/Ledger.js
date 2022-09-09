@@ -3,15 +3,12 @@ import { AddTransaction } from "../components/AddTransaction";
 import { Grid } from "@mui/material";
 import { Members } from "../../members/Members";
 import { Box } from "@mui/system";
-import { BalanceOutput, BalancesCalc } from "../../balances/domain/repository/balances";
-import { Link } from "react-router-dom";
+import { BalancesCalc } from "../../balances/domain/repository/balances";
 import { useParams } from 'react-router-dom';
-import { useEffect, useState, useRef } from "react";
 
 export const Ledger = () => {
     let groupName = useParams();
     groupName = groupName.groupName;
-    const [value, setValue] = useState(0);
 
     return <>
     {/* {console.log(groupName)} */}

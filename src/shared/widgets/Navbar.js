@@ -28,7 +28,7 @@ const ResponsiveAppBar = () => {
           >
             <HomeIcon/>
           </Box>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -44,24 +44,23 @@ const ResponsiveAppBar = () => {
             }}
           >
             SPLITTZER
-          </Typography>
+          </Typography> */}
           <Typography
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/"
             sx={{
               mr: 2,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
+              //display: { xs: "flex", md: "none" },
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "white",
               textDecoration: "none",
             }}
           >
-            LOGO
+            SPLITTZER
           </Typography>
         </Toolbar>
       </Container>

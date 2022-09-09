@@ -3,8 +3,6 @@ import { Container } from "@mui/system";
 import { useEffect, useState } from "react";
 import { BalanceOperation } from "../models/balanceOperations";
 import { BALANCES } from "../models/balances";
-import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
-import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { BalanceOutput } from "../../presentation/Balances";
 
 export const BalancesCalc = ({group_name}) => {
@@ -33,26 +31,54 @@ export const BalancesCalc = ({group_name}) => {
             console.log("Err in members data", err);
         })
 
-    },[])
+    },[group_name])
     
 
     const splitExpense = () =>{
         const memberCreditObj = BalanceOperation.memberCredit();
-        
-        for(const key in memberCreditObj){
-            if(memberCreditObj[key]>0){
-                payerObj[key]=memberCreditObj[key];
-                //console.log(key + ' owes ' + memberCreditObj[key]);
-            }else if(memberCreditObj[key]<0){
-                //console.log(key + ' recieves ' + Math.abs(memberCreditObj[key]));
-                payeeObj[key]=memberCreditObj[key];
+        //console.log(BalanceOperation.memberCount());
+
+        if(BalanceOperation.memberCount() == 2){
+
+            const tempBalanceObj = {};
+            for(const key in memberCreditObj){
+                if(memberCreditObj[key]>0){
+                    tempBalanceObj['payer']=key;
+                    tempBalanceObj['amount']=memberCreditObj[key];
+                }else if(memberCreditObj[key]<0){
+                    tempBalanceObj['payee']=key;
+                }
             }
+            balanceArray.push(tempBalanceObj);
+            setBalancesArray(balanceArray);
+            //console.log(balanceArray);
+            setIsBalanceCalc(true);
+
+        }else{
+
+            for(const key in memberCreditObj){
+                if(memberCreditObj[key]>0){
+                    payerObj[key]=memberCreditObj[key];
+                    //console.log(key + ' owes ' + memberCreditObj[key]);
+                }else if(memberCreditObj[key]<0){
+                    //console.log(key + ' recieves ' + Math.abs(memberCreditObj[key]));
+                    payeeObj[key]=memberCreditObj[key];
+                }
+            }
+
+            calcBalances();
+
         }
+        
         //console.log(payerObj);
         //console.log(payeeObj);
-        calcBalances();
-    //console.log(BalanceOperation.transactions);
-    //console.log(BalanceOperation.members);
+
+        
+        
+        //console.log(BalanceOperation.transactions);
+        //console.log(BalanceOperation.members);
+
+        //calcBalances();
     }
 
     const calcBalances = () => {
@@ -74,7 +100,7 @@ export const BalancesCalc = ({group_name}) => {
 
             const amount = payerEntries[i][1]+payeeEntries[j][1];
 
-            if(amount == 0){
+            if(amount === 0){
                 tempBalanceObj['amount'] = amount;
                 i++;
                 j++;
@@ -91,7 +117,7 @@ export const BalancesCalc = ({group_name}) => {
             balanceArray.push(tempBalanceObj);
         }
 
-        console.log(balanceArray);
+        //console.log(balanceArray);
         setBalancesArray(balanceArray);
         setIsBalanceCalc(true);
 

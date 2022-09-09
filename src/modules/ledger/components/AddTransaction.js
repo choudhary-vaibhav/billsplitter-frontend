@@ -3,7 +3,7 @@ import Container from "@mui/material/Container";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { FormControl, Typography } from "@mui/material";
-import { useEffect, useState, useRef, useContext, createContext } from "react";
+import { useEffect, useState, useRef } from "react";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -15,11 +15,28 @@ export const AddTransaction = ({group_name}) => {
     const desc = useRef('');
     const payed_by = useRef('');
     const expense = useRef('');
-    const [members, setMembers] = useState('');
+    //const [members, setMembers] = useState('');
+    const members = useRef([]);
     const [loading, setLoading] = useState(true);
 
     useEffect(()=>{
-		getMembers();
+		const getMembers = async () => {
+            try{
+                const URL = process.env.REACT_APP_LEDGER_URL + group_name + '/member';
+                //console.log(URL);
+                const result = await API_CLIENT.post(URL);
+                if(result){
+                    members.current.value = result.data.members; 
+                    //console.log(members);
+                    setLoading(false);
+                }
+    
+            }catch(err){
+                console.log('Error in Member Call ', err);
+            }
+        }
+
+        getMembers();
 	},[])
 
     const addTransaction = async () => {
@@ -34,29 +51,30 @@ export const AddTransaction = ({group_name}) => {
 
             const result = await API_CLIENT.post(URL, transactionObject);
             if(result && result.data.message){
-                console.log(result.data.message);
-                window.location.reload();
+                //console.log(result.data.message);
+                    window.location.reload();
+                
             }
         }catch(err){
             console.log('Error in adding transaction ', err);
         }
     }
 
-    const getMembers = async () => {
-		try{
-			const URL = process.env.REACT_APP_LEDGER_URL + group_name + '/member';
-			//console.log(URL);
-			const result = await API_CLIENT.post(URL);
-			if(result){
-				setMembers(result.data.members); 
-				console.log(members);
-                setLoading(false);
-			}
+    // const getMembers = async () => {
+	// 	try{
+	// 		const URL = process.env.REACT_APP_LEDGER_URL + group_name + '/member';
+	// 		//console.log(URL);
+	// 		const result = await API_CLIENT.post(URL);
+	// 		if(result){
+	// 			members = result.data.members; 
+	// 			console.log(members);
+    //             setLoading(false);
+	// 		}
 
-		}catch(err){
-			console.log('Error in Member Call ', err);
-		}
-	}
+	// 	}catch(err){
+	// 		console.log('Error in Member Call ', err);
+	// 	}
+	// }
 
   return (
     <>
@@ -102,7 +120,7 @@ export const AddTransaction = ({group_name}) => {
                         inputRef={payed_by}
                         >
                         <MenuItem disabled><em>None</em></MenuItem>
-                        {   members.map(member => {
+                        {   members.current.value.map(member => {
                                 return (
                                     <MenuItem value ={member}>{member}</MenuItem>
                                 );
@@ -110,7 +128,7 @@ export const AddTransaction = ({group_name}) => {
                         }
                         </Select>
                     </FormControl>
-                    <Button type="submit" onClick={addTransaction} variant="contained">ADD</Button>
+                    <Button onClick={addTransaction} variant="contained">ADD</Button>
                 </FormControl> 
             </form>   
         </Container>

@@ -1,14 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
 import { Container } from "@mui/system";
 import Typography from '@mui/material/Typography';
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
-import { Button, Grid, TableCell, TableContainer, TableRow } from "@mui/material";
+import { Button, TableCell, TableContainer, TableRow } from "@mui/material";
 
 export const BalanceOutput = ({balancesArray}) => {
 

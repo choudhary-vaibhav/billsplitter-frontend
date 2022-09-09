@@ -1,5 +1,3 @@
-import { BALANCES } from "./balances"
-
 export const BalanceOperation = {
 
     group_name : 'awesome',
@@ -8,8 +6,8 @@ export const BalanceOperation = {
 
     totalExpense(){
         let sum = 0;
-        this.transactions.map(transaction => {
-            sum += transaction['payment'];
+        this.transactions.forEach(transaction => {
+                sum += transaction['payment']; 
         })
         return sum;
     },
@@ -20,11 +18,11 @@ export const BalanceOperation = {
 
     memberExpense(){
         const memberExpObject = {};
-        this.members.map(member => {
+        this.members.forEach(member => {
 
             memberExpObject[member] = 0;
-            this.transactions.map(transaction => {
-                if(member == transaction['payer']){
+            this.transactions.forEach(transaction => {
+                if(member === transaction['payer']){
                     memberExpObject[member] += transaction['payment'];                    
                 }
             })
@@ -46,7 +44,7 @@ export const BalanceOperation = {
         let perShare = this.totalExpense()/this.memberCount();
         perShare = perShare.toFixed(2);
         
-        this.members.map(member => {
+        this.members.forEach(member => {
             memberCreditObj[member] = perShare - memberExpObject[member];
         })
 

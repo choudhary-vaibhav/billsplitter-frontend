@@ -4,7 +4,6 @@ import { Grid } from "@mui/material";
 import Logo from "../../assets/images/logo_img.png";
 import './homepage.css';
 import { Link } from "react-router-dom";
-import { Ledger } from "../ledger/pages/Ledger";
 
 export const Homepage = () => {
   return (

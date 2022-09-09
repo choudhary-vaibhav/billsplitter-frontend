@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CurrencyRupeeIcon from '@mui/icons-material/CurrencyRupee';
 import { Container } from '@mui/system';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 export const LedgerCard = ({group_name}) => {
 
@@ -25,7 +24,7 @@ export const LedgerCard = ({group_name}) => {
     },[])
 
     const delTransaction = async (key) => {
-        console.log(key);
+        //console.log(key);
         const transactionObject = {'_id':key}
 
         try{
@@ -33,9 +32,9 @@ export const LedgerCard = ({group_name}) => {
 
             const result = await API_CLIENT.post(URL, transactionObject);
             if(result && result.data.message){
-                console.log(result.data.message);
+                //console.log(result.data.message);
                 setLoading(true);
-                window.location.reload();
+                //window.location.reload();
                 getData();
 
             }

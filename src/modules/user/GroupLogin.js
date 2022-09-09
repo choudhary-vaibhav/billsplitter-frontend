@@ -1,43 +1,43 @@
 import Container from '@mui/material/Container';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { FormControl,Typography } from '@mui/material';
-import { useRef, useState, useContext, createContext } from 'react';
+import { CircularProgress, FormControl } from '@mui/material';
+import { useRef, useState } from 'react';
 import { API_CLIENT } from '../../shared/services/api-client';
-import { Link, Navigate } from "react-router-dom";
-import { useParams } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 
 export const GroupLogin = () => {
 		const [groupName, setGroupName] = useState('');
 		const [msg,setMsg] =useState('');
-		const [logged, setLogged] = useState('false');
 		const group = useRef('');
 		const pwd = useRef('');
+		const [load, setLoad] = useState(false);
 
 		const doLogin = async ()=>{
+			setLoad(true);
 			const group_Name = group.current.value;
 			const password= pwd.current.value;
 
 			const groupObject = {'name':group_Name, 'password':password};
-			console.log('groupObject is ', groupObject);
+			//console.log('groupObject is ', groupObject);
 			try{
 			const result = await API_CLIENT.post(process.env.REACT_APP_LOGIN_URL, groupObject); 
 			   
 				setMsg(result.data.message);
-				//setLoggedOut(false);
-				console.log(result.data.message);
+				//console.log(result.data.message);
 				//console.log(result.data.group_name);
 			   	setGroupName(result.data.group_name);	
 				//console.log(groupName);
-				setLogged(true);
 			}
 			catch(err){
-				console.log('Error in Login Call ', err);
+				//console.log('Error in Login Call ', err);
+				window.alert('Wrong Group Name or Password');
+				setLoad(false);
 			}
 		}
 
     const cardWidth = {
-        width: '75vw',
+        width: '70vw',
         '@media (min-width: 720px)' : {
           width: '50vw'
         },
@@ -74,6 +74,7 @@ export const GroupLogin = () => {
 					<Button onClick={doLogin} variant="contained">
 						LOGIN
 					</Button>
+					{load  ? <CircularProgress className="redirecting"/> : <div></div>}
 			</FormControl>
 		</form> 
 		</Container>
