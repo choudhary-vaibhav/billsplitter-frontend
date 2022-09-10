@@ -16,13 +16,13 @@ const ResponsiveAppBar = () => {
   }
 
  return (
-    <AppBar position="static" sx={{ bgcolor: "black", width:"100vw" }}>
+    <AppBar position="static" sx={{ bgcolor: "black", width:"105vw" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box
             sx={{
               "& > :not(style)": {
-                m: 2,
+                m: 0,
               },
             }}
           >
