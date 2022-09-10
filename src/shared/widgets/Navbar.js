@@ -22,7 +22,7 @@ const ResponsiveAppBar = () => {
           <Box
             sx={{
               "& > :not(style)": {
-                m: 0,
+                m: 2,
               },
             }}
           >
