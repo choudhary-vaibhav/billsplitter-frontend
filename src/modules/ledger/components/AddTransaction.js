@@ -122,7 +122,7 @@ export const AddTransaction = ({group_name}) => {
                         <MenuItem disabled><em>None</em></MenuItem>
                         {   members.current.value.map(member => {
                                 return (
-                                    <MenuItem value ={member}>{member}</MenuItem>
+                                    <MenuItem key={member} value ={member}>{member}</MenuItem>
                                 );
                             })
                         }

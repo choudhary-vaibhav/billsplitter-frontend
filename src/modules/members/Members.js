@@ -13,6 +13,7 @@ import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
+import { FormControl } from "@mui/material";
 
 export const Members = ({group_name}) => {
 
@@ -23,6 +24,17 @@ export const Members = ({group_name}) => {
 	useEffect(()=>{
 		getMembers();
 	})
+
+	const validation = () => {
+		const memValue = newMember.current.value;
+		//console.log(members.includes(newMember.current.value));
+		//console.log(members);
+		if(members.includes(memValue)){
+			window.alert('Member already exists!');
+		}else{
+			addMember();
+		}
+	}
 
 
   	const getMembers = async () => {
@@ -108,15 +120,18 @@ export const Members = ({group_name}) => {
 							)
 						})
 					}
-
 						<ListItem
                             secondaryAction={
-                                <IconButton onClick={addMember} edge="end" aria-label="add">
+                                <IconButton onClick={validation} edge="end" aria-label="add">
                                 <PersonAddIcon />
                                 </IconButton>
                             }
                         >
+						<FormControl>
+						<form autoComplete="off">
 						<TextField required inputRef={newMember} id="standard-basic" label="New Member" variant="standard" />
+						</form>
+						</FormControl>
 						</ListItem>
 					</List>
 				</Box>

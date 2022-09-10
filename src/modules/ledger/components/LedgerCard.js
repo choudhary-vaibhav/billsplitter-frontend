@@ -34,8 +34,8 @@ export const LedgerCard = ({group_name}) => {
             if(result && result.data.message){
                 //console.log(result.data.message);
                 setLoading(true);
-                //window.location.reload();
-                getData();
+                window.location.reload();
+                //getData();
 
             }
         }catch(err){

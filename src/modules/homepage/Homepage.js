@@ -9,8 +9,8 @@ export const Homepage = () => {
   return (
     <Container id='homepage' st>
       <Grid container alignItems="center" justifyContent="center" direction="column" maxWidth="sm" style={{ minHeight: '80vh' }}>
-        <img src={Logo} alt="img" width="100" height="100" />
-        <h1>SPLITTZER</h1>
+        <img src={Logo} alt="img" width="200" height="200" />
+        {/* <h1>SPLITTZER</h1> */}
         <Grid>
             <Link style={{textDecoration: 'none'}} to="/CreateGroup">
             <Button

@@ -101,7 +101,7 @@ export const BalancesCalc = ({group_name}) => {
             const amount = payerEntries[i][1]+payeeEntries[j][1];
 
             if(amount === 0){
-                tempBalanceObj['amount'] = amount;
+                tempBalanceObj['amount'] = Math.abs(payeeEntries[j][1]);
                 i++;
                 j++;
             }else if(amount > 0){
@@ -110,10 +110,9 @@ export const BalancesCalc = ({group_name}) => {
                 j++;
             }else{
                 tempBalanceObj['amount'] = Math.abs(payerEntries[i][1]);
-                payerEntries[i][1] = amount;
+                payeeEntries[j][1] = amount;
                 i++;
             }
-
             balanceArray.push(tempBalanceObj);
         }
 
